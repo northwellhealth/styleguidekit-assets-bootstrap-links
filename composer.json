@@ -1,27 +1,12 @@
 {
-	"name":             "pattern-lab/styleguidekit-assets-default",
-	"description":      "The assets for the default StyleguideKit for Pattern Lab. Contains styles and mark-up for Pattern Lab's front-end.",
-	"keywords":         ["mustache", "pattern lab", "styleguide"],
+	"name":             "notacouch/styleguidekit-assets-bootstrap-links",
+	"description":      "The assets for the default StyleguideKit for Pattern Lab adjusted for Bootstrap. Contains styles and mark-up for Pattern Lab's front-end.",
+	"keywords":         ["mustache", "pattern lab", "styleguide", "bootstrap"],
 	"homepage":         "http://patternlab.io",
 	"license":          "MIT",
 	"type":             "patternlab-styleguidekit",
-	"authors": [
-		{
-			"name":         "Dave Olsen",
-			"email":        "dmolsen@gmail.com",
-			"homepage":     "http://dmolsen.com",
-			"role":         "Lead Developer"
-		},
-		{
-			"name":         "Brad Frost",
-			"homepage":     "http://bradfrostweb.com",
-			"role":         "Creator"
-		}
-	],
-	"support": {
-		"issues":         "https://github.com/pattern-lab/styleguidekit-assets-default/issues",
-		"wiki":           "http://patternlab.io/docs/",
-		"source":         "https://github.com/pattern-lab/styleguidekit-assets-default/releases"
+	"replaces": {
+		"pattern-lab/styleguidekit-assets-default": "self.version"
 	},
 	"extra": {
 		"patternlab": {

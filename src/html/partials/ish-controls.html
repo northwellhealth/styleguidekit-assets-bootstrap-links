@@ -9,6 +9,9 @@
         </form><!--end #sg-form-->
       </div><!--end #sg-current-size-->
       <ul class="sg-size-options">
+          {{^ ishControlsHide.xs }}
+            <li><a href="#" id="sg-size-xs">XS</a></li>
+          {{/ ishControlsHide.xs }}
         {{^ ishControlsHide.s }}
           <li><a href="#" id="sg-size-s">S</a></li>
         {{/ ishControlsHide.s }}
