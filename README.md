@@ -1,6 +1,3 @@
-![License: MIT](https://img.shields.io/github/license/notacouch/styleguidekit-assets-bootstrap-links.svg)
-![Packagist](https://img.shields.io/packagist/v/notacouch/styleguidekit-assets-bootstrap-links.svg)]
-
 # Static Assets for the Default StyleguideKit
 
 These static assets are meant to be used with the default [Mustache](https://github.com/pattern-lab/styleguidekit-mustache-default) and [Twig](https://github.com/pattern-lab/styleguidekit-twig-default) StyleguideKits. They control the look, feel, and functionality of the front-end of Pattern Lab PHP.
@@ -55,7 +52,6 @@ YAML example:
     l:
       - 1200
       - 2600
-  },
 ```
 
 ## Development Requirements
