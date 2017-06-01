@@ -1,22 +1,19 @@
 {
-  "name": "styleguidekit-assets-default",
+  "name": "styleguidekit-assets-bootstrap-links",
   "version": "3.5.0",
-  "description": "The default set of front-end assets for Pattern Lab.",
+  "description": "Enhancement of default set of front-end assets for Pattern Lab to provide links for Bootstrap-like media queries.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pattern-lab/styleguidekit-assets-default.git"
+    "url": "git://github.com/notacouch/styleguidekit-assets-bootstrap-links.git"
   },
   "author": "Dave Olsen",
   "contributors": [
     {
-      "name": "Brian Muenzenmeyer"
+      "name": "Abed Islam"
     }
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pattern-lab/styleguidekit-assets-default/issues"
-  },
-  "homepage": "https://github.com/pattern-lab/styleguidekit-assets-default",
+  "homepage": "https://github.com/notacouch/styleguidekit-assets-bootstrap-links",
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.6",
