@@ -22,7 +22,7 @@
 
     //alternatively, use the ishViewportRange object
     if (config.ishViewportRange !== undefined) {
-      minViewportWidth = config.ishViewportRange.s[0];
+      minViewportWidth = config.ishViewportRange.xs[0];
       maxViewportWidth = config.ishViewportRange.l[1];
     }
 
@@ -116,14 +116,35 @@
 
   //Size View Events
 
+  // handle extra small button
+  function goExtraSmall() {
+    killDisco();
+    killHay();
+    fullMode = false;
+    sizeiframe(getRandom(
+      minViewportWidth,
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.xs[1]) : 767
+    ));
+  }
+
+  $('#sg-size-xs').on("click", function(e){
+    e.preventDefault();
+    goExtraSmall();
+  });
+  
+  jwerty.key('ctrl+shift+x', function(e) {
+    goExtraSmall();
+    return false;
+  });
+  
   // handle small button
   function goSmall() {
     killDisco();
     killHay();
     fullMode = false;
     sizeiframe(getRandom(
-      minViewportWidth,
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[1]) : 500
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[0]) : 768,
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[1]) : 992
     ));
   }
 
@@ -626,6 +647,8 @@
           goMedium();
         } else if (data.keyPress == 'ctrl+shift+l') {
           goLarge();
+        } else if (data.keyPress == 'ctrl+shift+x') {
+          goExtraSmall();
         } else if (data.keyPress == 'ctrl+shift+d') {
           if (!discoMode) {
             startDisco();
