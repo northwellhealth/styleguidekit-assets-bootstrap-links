@@ -1460,7 +1460,7 @@ window.addEventListener("message", receiveIframeMessage, false);
     fullMode = false;
     sizeiframe(getRandom(
       config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[0]) : 768,
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[1]) : 992
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.s[1]) : 991
     ));
   }
 
@@ -1480,8 +1480,8 @@ window.addEventListener("message", receiveIframeMessage, false);
     killHay();
     fullMode = false;
     sizeiframe(getRandom(
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.m[0]) : 500,
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.m[1]) : 800
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.m[0]) : 992,
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.m[1]) : 1199
     ));
   }
 
@@ -1491,7 +1491,7 @@ window.addEventListener("message", receiveIframeMessage, false);
   });
 
   jwerty.key('ctrl+shift+m', function(e) {
-    goLarge();
+    goMedium();
     return false;
   });
 
@@ -1501,8 +1501,8 @@ window.addEventListener("message", receiveIframeMessage, false);
     killHay();
     fullMode = false;
     sizeiframe(getRandom(
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.l[0]) : 800,
-      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.l[1]) : 1200
+      config.ishViewportRange !== undefined ? parseInt(config.ishViewportRange.l[0]) : 1200,
+      maxViewportWidth
     ));
   }
 

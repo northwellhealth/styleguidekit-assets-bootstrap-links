@@ -175,7 +175,7 @@
   });
 
   jwerty.key('ctrl+shift+m', function(e) {
-    goLarge();
+    goMedium();
     return false;
   });
 
