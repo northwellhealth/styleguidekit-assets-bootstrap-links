@@ -1705,7 +1705,7 @@ window.addEventListener("message", receiveIframeMessage, false);
     var theSize;
 
     if(size>maxViewportWidth) { //If the entered size is larger than the max allowed viewport size, cap value at max vp size
-      theSize = maxViewportWidth;
+      theSize = Math.min(sw, maxViewportWidth); // cap value at iframe size
     } else if(size<minViewportWidth) { //If the entered size is less than the minimum allowed viewport size, cap value at min vp size
       theSize = minViewportWidth;
     } else {
