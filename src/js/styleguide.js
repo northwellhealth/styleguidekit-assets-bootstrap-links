@@ -389,12 +389,14 @@
     var theSize;
 
     if(size>maxViewportWidth) { //If the entered size is larger than the max allowed viewport size, cap value at max vp size
-      theSize = Math.min(sw, maxViewportWidth); // cap value at iframe size
+      theSize = maxViewportWidth;
     } else if(size<minViewportWidth) { //If the entered size is less than the minimum allowed viewport size, cap value at min vp size
       theSize = minViewportWidth;
     } else {
       theSize = size;
     }
+    
+    theSize = Math.min(sw, theSize); // cap value at iframe size
 
     //Conditionally remove CSS animation class from viewport
     if(animate===false) {
