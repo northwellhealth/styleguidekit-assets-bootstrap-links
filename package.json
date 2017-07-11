@@ -1,6 +1,6 @@
 {
   "name": "styleguidekit-assets-bootstrap-links",
-  "version": "3.5.0",
+  "version": "3.5.0.1",
   "description": "Enhancement of default set of front-end assets for Pattern Lab to provide links for Bootstrap-like media queries.",
   "repository": {
     "type": "git",
