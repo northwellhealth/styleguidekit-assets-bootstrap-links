@@ -478,11 +478,10 @@
 * We're using Twitter Typeahead to autocomplete pattern
 * searches. https://twitter.github.io/typeahead.js/
 */
-.twitter-typeahead {
+#sg-find .twitter-typeahead {
   width: 100%;
 }
-
-.typeahead {
+#sg-find .typeahead {
   border: 0;
   background: #222;
   color: #808080;
@@ -491,46 +490,40 @@
   padding: 0.8em;
   text-transform: lowercase;
 }
-.typeahead:focus {
+#sg-find .typeahead:focus {
   background: #808080;
   color: #fff;
 }
-
-.tt-input {
+#sg-find .tt-input {
   background: #808080;
   color: #fff;
   text-transform: uppercase;
 }
-.tt-input:focus {
+#sg-find .tt-input:focus {
   text-transform: lowercase;
 }
-
-.tt-hint {
+#sg-find .tt-hint {
   text-transform: lowercase;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-
-.tt-dropdown-menu {
+#sg-find .tt-dropdown-menu {
   text-transform: lowercase;
   background-color: #808080;
   width: 100%;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-
-.tt-suggestion {
+#sg-find .tt-suggestion {
   color: #eee;
   font-size: 75%;
   padding: 0.8em;
 }
-
-.tt-suggestion.tt-cursor {
+#sg-find .tt-suggestion.tt-cursor {
   color: #fff;
   background: rgba(255, 255, 255, 0.25);
 }
-
-.tt-suggestion p {
+#sg-find .tt-suggestion p {
   margin: 0;
 }
 
