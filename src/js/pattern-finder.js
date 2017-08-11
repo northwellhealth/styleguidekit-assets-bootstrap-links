@@ -21,6 +21,8 @@ var patternFinder = {
           var obj = {};
           obj.patternPartial = patternType+"-"+pattern;
           obj.patternPath    = patternPaths[patternType][pattern];
+          obj.state          = /@.+$/.test(patternPaths[patternType][pattern]) ? patternPaths[patternType][pattern].match(/@(.+)$/)[1] : '';
+          obj.display        = obj.patternPartial + (obj.state.length ? ', state: ' + obj.state : '');
           this.data.push(obj);
         }
       }
@@ -28,7 +30,11 @@ var patternFinder = {
     
     // instantiate the bloodhound suggestion engine
     var patterns = new Bloodhound({
-      datumTokenizer: function(d) { return Bloodhound.tokenizers.nonword(d.patternPartial); },
+      datumTokenizer: function(d) { 
+          var partial_results = Bloodhound.tokenizers.nonword(d.patternPartial);
+          var state_results = Bloodhound.tokenizers.nonword(d.state);
+          return partial_results.concat(state_results); 
+      },
       queryTokenizer: Bloodhound.tokenizers.nonword,
       limit: 10,
       local: this.data
@@ -38,7 +44,7 @@ var patternFinder = {
     patterns.initialize();
     
     $('#sg-find .typeahead').typeahead({ highlight: true }, {
-      displayKey: 'patternPartial',
+      displayKey: 'display',
       source: patterns.ttAdapter()
     }).on('typeahead:selected', patternFinder.onSelected).on('typeahead:autocompleted', patternFinder.onAutocompleted);
     
