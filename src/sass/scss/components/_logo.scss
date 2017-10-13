@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    #LOGO
+\*------------------------------------*/
+
+/**
+* 1) An optional logo that lives in PL's header.
+*/
+.pl-c-logo {
+    max-width: 2rem;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pl-c-logo__img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

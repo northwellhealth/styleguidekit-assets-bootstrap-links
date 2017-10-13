@@ -10,16 +10,16 @@
 
 var patternFinder = {
   
-  data:   [],
+	data: [],
   active: false,
   
-  init: function() {
+	init: function () {
     
     for (var patternType in patternPaths) {
       if (patternPaths.hasOwnProperty(patternType)) {
         for (var pattern in patternPaths[patternType]) {
           var obj = {};
-          obj.patternPartial = patternType+"-"+pattern;
+          obj.patternPartial = patternType + "-" + pattern;
           obj.patternPath    = patternPaths[patternType][pattern];
           obj.state          = /@.+$/.test(patternPaths[patternType][pattern]) ? patternPaths[patternType][pattern].match(/@(.+)$/)[1] : '';
           obj.display        = obj.patternPartial + (obj.state.length ? ', state: ' + obj.state : '');
@@ -30,7 +30,7 @@ var patternFinder = {
     
     // instantiate the bloodhound suggestion engine
     var patterns = new Bloodhound({
-      datumTokenizer: function(d) { 
+      datumTokenizer: function (d) { 
           var partial_results = Bloodhound.tokenizers.nonword(d.patternPartial);
           var state_results = Bloodhound.tokenizers.nonword(d.state);
           return partial_results.concat(state_results); 
@@ -43,29 +43,34 @@ var patternFinder = {
     // initialize the bloodhound suggestion engine
     patterns.initialize();
     
-    $('#sg-find .typeahead').typeahead({ highlight: true }, {
-      displayKey: 'display',
+		$('.pl-js-typeahead').typeahead({
+			highlight: true
+		}, {
+			displayKey: 'display',
       source: patterns.ttAdapter()
     }).on('typeahead:selected', patternFinder.onSelected).on('typeahead:autocompleted', patternFinder.onAutocompleted);
     
   },
   
-  passPath: function(item) {
+	passPath: function (item) {
     // update the iframe via the history api handler
     patternFinder.closeFinder();
-    var obj = JSON.stringify({ "event": "patternLab.updatePath", "path": urlHandler.getFileName(item.patternPartial) });
-    document.getElementById("sg-viewport").contentWindow.postMessage(obj, urlHandler.targetOrigin);
+		var obj = JSON.stringify({
+			"event": "patternLab.updatePath",
+			"path": urlHandler.getFileName(item.patternPartial)
+		});
+		document.querySelector('.pl-js-iframe').contentWindow.postMessage(obj, urlHandler.targetOrigin);
   },
   
-  onSelected: function(e,item) {
+	onSelected: function (e, item) {
     patternFinder.passPath(item);
   },
   
-  onAutocompleted: function(e,item) {
+	onAutocompleted: function (e, item) {
     patternFinder.passPath(item);
   },
   
-  toggleFinder: function() {
+	toggleFinder: function () {
     if (!patternFinder.active) {
       patternFinder.openFinder();
     } else {
@@ -73,30 +78,28 @@ var patternFinder = {
     }
   },
   
-  openFinder: function() {
+	openFinder: function () {
     patternFinder.active = true;
-    $('#sg-find .typeahead').val("");
-    $("#sg-find").addClass('show-overflow');
+		$('.pl-js-typeahead').val("");
   },
   
-  closeFinder: function() {
+	closeFinder: function () {
     patternFinder.active = false;
     document.activeElement.blur();
-    $("#sg-find").removeClass('show-overflow');
-    $('#sg-find .typeahead').val("");
+		$('.pl-js-typeahead').val("");
   },
   
-  receiveIframeMessage: function(event) {
+	receiveIframeMessage: function (event) {
     
     // does the origin sending the message match the current host? if not dev/null the request
-    if ((window.location.protocol !== "file:") && (event.origin !== window.location.protocol+"//"+window.location.host)) {
+		if ((window.location.protocol !== "file:") && (event.origin !== window.location.protocol + "//" + window.location.host)) {
       return;
     }
     
     var data = {};
     try {
       data = (typeof event.data !== 'string') ? event.data : JSON.parse(event.data);
-    } catch(e) {}
+		} catch (e) {}
     
     if ((data.event !== undefined) && (data.event == "patternLab.keyPress")) {
       
@@ -115,12 +118,13 @@ patternFinder.init();
 
 window.addEventListener("message", patternFinder.receiveIframeMessage, false);
 
-$('#sg-find .typeahead').focus(function() {
+$('.pl-js-typeahead').focus(function () {
   if (!patternFinder.active) {
     patternFinder.openFinder();
   }
 });
 
-$('#sg-find .typeahead').blur(function() {
+$('.pl-js-typeahead').blur(function () {
   patternFinder.closeFinder();
 });
+

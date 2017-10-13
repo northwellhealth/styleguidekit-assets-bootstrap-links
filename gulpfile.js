@@ -10,6 +10,7 @@ var plugins            = gulpLoadPlugins({ scope: ['devDependencies'] });
 plugins.del            = require("del");
 plugins.mainBowerFiles = require("main-bower-files");
 
+/* copy the dist folder into the designated public folder */
 function copyPublic(suffix) {
 	if (args['copy-dist'] !== undefined) {
 		return gulp.dest(args['copy-dist'] + "/" + suffix);
@@ -23,12 +24,8 @@ gulp.task('clean:bower', function (cb) {
 	return plugins.del(['dist/styleguide/bower_components/*'],cb);
 });
 
-gulp.task('clean:css-patternlab', function (cb) {
+gulp.task('clean:css', function (cb) {
 	return plugins.del(['dist/styleguide/css/*'],cb);
-});
-
-gulp.task('clean:fonts', function (cb) {
-	return plugins.del(['dist/styleguide/fonts/*'],cb);
 });
 
 gulp.task('clean:html', function (cb) {
@@ -52,30 +49,11 @@ gulp.task('build:bower', ['clean:bower'], function(){
 		.pipe(copyPublic("styleguide/bower_components"));
 });
 
-gulp.task('build:css-general', ['clean:css-patternlab'], function() {
-	return gulp.src(['src/css/prism-okaidia.css','src/css/typeahead.css'])
-		.pipe(plugins.concat('prism-typeahead.css'))
-		.pipe(gulp.dest('dist/styleguide/css'))
-		.pipe(plugins.rename({suffix: '.min'}))
-		.pipe(plugins.minifyCss())
-		.pipe(gulp.dest('dist/styleguide/css'))
-		.pipe(copyPublic("styleguide/css"));
-});
-
-gulp.task('build:css-patternlab', ['build:css-general'], function() {
-	return plugins.rubySass('src/sass/styleguide.scss', { style: 'expanded', "sourcemap=none": true })
+gulp.task('build:css', function() {
+	return plugins.rubySass('src/sass/pattern-lab.scss', { style: 'expanded', "sourcemap=none": true })
 		.pipe(plugins.autoprefixer({browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'android 4']}, {map: false }))
 		.pipe(gulp.dest('dist/styleguide/css'))
-		.pipe(plugins.rename({suffix: '.min'}))
-		.pipe(plugins.minifyCss())
-		.pipe(gulp.dest('dist/styleguide/css'))
 		.pipe(copyPublic("styleguide/css"));
-});
-
-gulp.task('build:fonts', ['clean:fonts'], function() {
-	return gulp.src('src/fonts/*')
-		.pipe(gulp.dest('dist/styleguide/fonts'))
-		.pipe(copyPublic("styleguide/fonts"));
 });
 
 gulp.task('build:html', ['clean:html'], function() {
@@ -125,11 +103,10 @@ gulp.task('build:js-pattern', ['build:js-viewer'], function() {
 		.pipe(copyPublic("styleguide/js"));
 });
 
-gulp.task('default', ['build:bower', 'build:css-patternlab', 'build:html', 'build:js-pattern'], function () {
+gulp.task('default', ['build:bower', 'build:css', 'build:html', 'build:js-pattern'], function () {
 	if (args.watch !== undefined) {
 		gulp.watch(['src/bower_components/**/*'], ['build:bower']);
-		gulp.watch(['src/css/prism-okaidia.css'],['build:css-general']);
-		gulp.watch(['src/sass/styleguide.scss'], ['build:css-patternlab']);
+		gulp.watch(['src/sass/pattern-lab.scss', 'src/sass/scss/**/*'], ['build:css']);
 		gulp.watch(['src/html/*'], ['build:html']);
 		gulp.watch(['src/js/*'], ['build:js-pattern']);
 	}
